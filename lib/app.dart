@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'screens/login_screen.dart';
 import 'screens/dashboard_screen.dart';
@@ -10,18 +9,40 @@ import 'services/firestore_service.dart';
 import 'services/auth_service.dart';
 import 'providers/dashboard_provider.dart';
 import 'providers/course_provider.dart';
-import 'firebase_options.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // 初始化 Firebase
-  Future<void> _initializeFirebase() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  }
+</edit>
 
+<origin>
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _initializeFirebase(),
+      builder: (context, snapshot) {
+        // 如果正在初始化，显示加载界面
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const MaterialApp(
+            home: Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            ),
+          );
+        }
+        
+        // 如果初始化出错，显示错误信息
+        if (snapshot.hasError) {
+          return MaterialApp(
+            home: Scaffold(
+              body: Center(child: Text('Error: ${snapshot.error}')),
+            ),
+          );
+        }
+        
+        return MultiProvider(
+</origin>
+<edit>
+  Widget build(BuildContext context) {
+    return MultiProvider(
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -103,7 +124,7 @@ class MyApp extends StatelessWidget {
   // 处理身份认证状态
   Widget _handleAuthState() {
     return StreamBuilder(
-      stream: AuthService().userStream,
+      stream: AuthService().authStateChanges,
       builder: (context, AsyncSnapshot snapshot) {
         // 如果有用户登录，跳转到首页
         if (snapshot.hasData) {

@@ -21,15 +21,15 @@ class DefaultFirebaseOptions {
         return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
-          'DefaultFirebaseOptions尚未为Windows平台配置。',
+          'DefaultFirebaseOptions尚未为Windows平台配置。请考虑使用Web或移动平台选项。',
         );
       case TargetPlatform.linux:
         throw UnsupportedError(
-          'DefaultFirebaseOptions尚未为Linux平台配置。',
+          'DefaultFirebaseOptions尚未为Linux平台配置。请考虑使用Web或移动平台选项。',
         );
       default:
         throw UnsupportedError(
-          'DefaultFirebaseOptions尚未为此平台配置。',
+          'DefaultFirebaseOptions尚未为此平台配置。目前仅支持Android、iOS、macOS和Web平台。',
         );
     }
   }

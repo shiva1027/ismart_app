@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import '../providers/dashboard_provider.dart';
-import '../services/firestore_service.dart';
 import '../widgets/performance_widget.dart';
 import '../widgets/news_card.dart';
 

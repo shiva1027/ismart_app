@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../config/theme.dart';
@@ -6,7 +5,7 @@ import '../../services/auth_service.dart';
 import '../../widgets/custom_snackbar.dart';
 
 class HomeTab extends StatelessWidget {
-  const HomeTab({Key? key}) : super(key: key);
+  const HomeTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class HomeTab extends StatelessWidget {
           await Future.delayed(const Duration(seconds: 1));
           if (context.mounted) {
             showCustomSnackBar(
-              context: context, 
+              context: context,
               message: '数据已更新',
               type: SnackBarType.success,
             );
@@ -62,9 +61,9 @@ class HomeTab extends StatelessWidget {
                         radius: 30,
                         backgroundColor: AppTheme.primaryColor.withOpacity(0.2),
                         child: Text(
-                          user?.name.isNotEmpty == true 
-                            ? user!.name.substring(0, 1).toUpperCase()
-                            : 'S',
+                          user?.name.isNotEmpty == true
+                              ? user!.name.substring(0, 1).toUpperCase()
+                              : 'S',
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -87,9 +86,7 @@ class HomeTab extends StatelessWidget {
                             const SizedBox(height: 4),
                             Text(
                               '今天是 ${DateTime.now().year}年${DateTime.now().month}月${DateTime.now().day}日 星期${_getWeekdayInChinese(DateTime.now().weekday)}',
-                              style: TextStyle(
-                                color: Colors.grey.shade600,
-                              ),
+                              style: TextStyle(color: Colors.grey.shade600),
                             ),
                             const SizedBox(height: 8),
                             const Text(
@@ -161,10 +158,7 @@ class HomeTab extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         if (actionText.isNotEmpty)
           TextButton(
@@ -188,9 +182,7 @@ class HomeTab extends StatelessWidget {
     ];
 
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Column(
         children: List.generate(grades.length, (index) {
           final grade = grades[index];
@@ -226,10 +218,30 @@ class HomeTab extends StatelessWidget {
   Widget _buildCourseCard(int index) {
     // 模拟课程数据
     final courses = [
-      {'name': '高等数学提高班', 'teacher': '李教授', 'level': '高级', 'color': Colors.blue},
-      {'name': '英语口语强化', 'teacher': '王教授', 'level': '中级', 'color': Colors.green},
-      {'name': '物理实验专题', 'teacher': '张教授', 'level': '中级', 'color': Colors.orange},
-      {'name': '编程入门与实践', 'teacher': '陈教授', 'level': '初级', 'color': Colors.purple},
+      {
+        'name': '高等数学提高班',
+        'teacher': '李教授',
+        'level': '高级',
+        'color': Colors.blue,
+      },
+      {
+        'name': '英语口语强化',
+        'teacher': '王教授',
+        'level': '中级',
+        'color': Colors.green,
+      },
+      {
+        'name': '物理实验专题',
+        'teacher': '张教授',
+        'level': '中级',
+        'color': Colors.orange,
+      },
+      {
+        'name': '编程入门与实践',
+        'teacher': '陈教授',
+        'level': '初级',
+        'color': Colors.purple,
+      },
       {'name': '创新思维训练', 'teacher': '赵教授', 'level': '高级', 'color': Colors.red},
     ];
 
@@ -239,9 +251,7 @@ class HomeTab extends StatelessWidget {
       width: 160,
       margin: const EdgeInsets.only(right: 12),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -249,14 +259,12 @@ class HomeTab extends StatelessWidget {
               height: 80,
               decoration: BoxDecoration(
                 color: course['color'] as Color,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
               ),
               alignment: Alignment.center,
-              child: Icon(
-                Icons.school,
-                color: Colors.white,
-                size: 40,
-              ),
+              child: Icon(Icons.school, color: Colors.white, size: 40),
             ),
             Padding(
               padding: const EdgeInsets.all(12),
@@ -265,23 +273,21 @@ class HomeTab extends StatelessWidget {
                 children: [
                   Text(
                     course['name'] as String,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     '讲师: ${course['teacher']}',
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 12,
-                    ),
+                    style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
                   ),
                   const SizedBox(height: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: (course['color'] as Color).withOpacity(0.2),
                       borderRadius: BorderRadius.circular(4),
@@ -307,21 +313,9 @@ class HomeTab extends StatelessWidget {
   Widget _buildNewsItem(int index) {
     // 模拟新闻数据
     final news = [
-      {
-        'title': '关于举办2024年春季校园招聘会的通知',
-        'time': '2024-03-15',
-        'type': '通知',
-      },
-      {
-        'title': '学校图书馆新增电子资源使用指南',
-        'time': '2024-03-10',
-        'type': '公告',
-      },
-      {
-        'title': '2024年暑期国际交流项目申请开始',
-        'time': '2024-03-05',
-        'type': '活动',
-      },
+      {'title': '关于举办2024年春季校园招聘会的通知', 'time': '2024-03-15', 'type': '通知'},
+      {'title': '学校图书馆新增电子资源使用指南', 'time': '2024-03-10', 'type': '公告'},
+      {'title': '2024年暑期国际交流项目申请开始', 'time': '2024-03-05', 'type': '活动'},
     ];
 
     final item = index < news.length ? news[index] : news[0];

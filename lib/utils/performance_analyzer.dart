@@ -4,15 +4,14 @@
 import 'dart:math';
 import '../models/student_model.dart';
 import '../models/subject_model.dart';
-import '../models/performance_model.dart';
 import '../models/score_model.dart';
-import '../utils/constants.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
 
 class PerformanceAnalyzer {
   // 分析学生在特定学科的表现趋势
-  static Map<String, dynamic> analyzePerformanceTrend(List<ScoreModel> historicalScores) {
+  static Map<String, dynamic> analyzePerformanceTrend(
+    List<ScoreModel> historicalScores,
+  ) {
     if (historicalScores.isEmpty) {
       return {
         'trend': 'insufficient_data',
@@ -28,9 +27,15 @@ class PerformanceAnalyzer {
     historicalScores.sort((a, b) => a.date.compareTo(b.date));
 
     // 计算关键指标
-    double averageScore = historicalScores.map((score) => score.value).reduce((a, b) => a + b) / historicalScores.length;
-    double highestScore = historicalScores.map((score) => score.value).reduce(max);
-    double lowestScore = historicalScores.map((score) => score.value).reduce((a, b) => a < b ? a : b);
+    double averageScore =
+        historicalScores.map((score) => score.value).reduce((a, b) => a + b) /
+        historicalScores.length;
+    double highestScore = historicalScores
+        .map((score) => score.value)
+        .reduce(max);
+    double lowestScore = historicalScores
+        .map((score) => score.value)
+        .reduce((a, b) => a < b ? a : b);
 
     // 计算进步情况
     double firstScore = historicalScores.first.value;
@@ -39,9 +44,12 @@ class PerformanceAnalyzer {
 
     // 计算一致性得分（标准差的倒数，越一致分数越高）
     double mean = averageScore;
-    double sumSquaredDiff = historicalScores.map((score) => pow(score.value - mean, 2)).reduce((a, b) => a + b);
+    double sumSquaredDiff = historicalScores
+        .map((score) => pow(score.value - mean, 2))
+        .reduce((a, b) => a + b);
     double standardDeviation = sqrt(sumSquaredDiff / historicalScores.length);
-    double consistencyScore = standardDeviation > 0 ? 100 / standardDeviation : 100;
+    double consistencyScore =
+        standardDeviation > 0 ? 100 / standardDeviation : 100;
 
     // 确定趋势
     String trend;
@@ -89,7 +97,10 @@ class PerformanceAnalyzer {
   }
 
   // 预测未来成绩
-  static Map<String, dynamic> predictFuturePerformance(List<ScoreModel> historicalScores, int periodsAhead) {
+  static Map<String, dynamic> predictFuturePerformance(
+    List<ScoreModel> historicalScores,
+    int periodsAhead,
+  ) {
     if (historicalScores.length < 3 || periodsAhead < 1) {
       return {
         'predictedScores': <double>[],
@@ -147,7 +158,9 @@ class PerformanceAnalyzer {
   }
 
   // 识别学生的优势与弱点学科
-  static Map<String, List<SubjectModel>> identifyStrengthsAndWeaknesses(Map<String, List<ScoreModel>> subjectScores) {
+  static Map<String, List<SubjectModel>> identifyStrengthsAndWeaknesses(
+    Map<String, List<ScoreModel>> subjectScores,
+  ) {
     if (subjectScores.isEmpty) {
       return {
         'strengths': <SubjectModel>[],
@@ -162,7 +175,9 @@ class PerformanceAnalyzer {
 
     subjectScores.forEach((subjectId, scores) {
       if (scores.isNotEmpty) {
-        double average = scores.map((score) => score.value).reduce((a, b) => a + b) / scores.length;
+        double average =
+            scores.map((score) => score.value).reduce((a, b) => a + b) /
+            scores.length;
         subjectAverages[subjectId] = average;
 
         // 假设我们可以从分数中获取学科信息（这里只是示例，实际项目中需要调整）
@@ -177,7 +192,8 @@ class PerformanceAnalyzer {
     });
 
     // 计算总平均分
-    double overallAverage = subjectAverages.values.reduce((a, b) => a + b) / subjectAverages.length;
+    double overallAverage =
+        subjectAverages.values.reduce((a, b) => a + b) / subjectAverages.length;
 
     // 识别优势和弱点（与平均分相比）
     List<SubjectModel> strengths = [];
@@ -208,7 +224,9 @@ class PerformanceAnalyzer {
 
   // 比较学生与班级平均水平的差距
   static Map<String, dynamic> compareWithClassAverage(
-      Map<String, double> studentAverages, Map<String, double> classAverages) {
+    Map<String, double> studentAverages,
+    Map<String, double> classAverages,
+  ) {
     if (studentAverages.isEmpty || classAverages.isEmpty) {
       return {
         'overall': {
@@ -222,13 +240,16 @@ class PerformanceAnalyzer {
     }
 
     // 计算学生总平均分
-    double studentOverallAvg = studentAverages.values.reduce((a, b) => a + b) / studentAverages.length;
+    double studentOverallAvg =
+        studentAverages.values.reduce((a, b) => a + b) / studentAverages.length;
 
     // 计算班级总平均分
-    double classOverallAvg = classAverages.values.reduce((a, b) => a + b) / classAverages.length;
+    double classOverallAvg =
+        classAverages.values.reduce((a, b) => a + b) / classAverages.length;
 
     // 假设百分位数（在实际应用中，这需要额外的数据）
-    double assumedPercentile = studentOverallAvg > classOverallAvg ? 75.0 : 25.0;
+    double assumedPercentile =
+        studentOverallAvg > classOverallAvg ? 75.0 : 25.0;
 
     // 按学科比较
     List<Map<String, dynamic>> subjectComparisons = [];
@@ -250,7 +271,9 @@ class PerformanceAnalyzer {
     });
 
     // 按差异大小排序
-    subjectComparisons.sort((a, b) => b['difference'].abs().compareTo(a['difference'].abs()));
+    subjectComparisons.sort(
+      (a, b) => b['difference'].abs().compareTo(a['difference'].abs()),
+    );
 
     return {
       'overall': {
@@ -265,7 +288,8 @@ class PerformanceAnalyzer {
 
   // 生成学习建议
   static List<Map<String, String>> generateLearningRecommendations(
-      Map<String, List<SubjectModel>> strengthsAndWeaknesses) {
+    Map<String, List<SubjectModel>> strengthsAndWeaknesses,
+  ) {
     List<Map<String, String>> recommendations = [];
 
     // 针对弱势学科的建议
@@ -307,7 +331,9 @@ class PerformanceAnalyzer {
   }
 
   // 生成性能可视化数据
-  static Map<String, dynamic> generatePerformanceVisualData(List<ScoreModel> historicalScores) {
+  static Map<String, dynamic> generatePerformanceVisualData(
+    List<ScoreModel> historicalScores,
+  ) {
     if (historicalScores.isEmpty) {
       return {
         'lineChartData': <FlSpot>[],
@@ -327,7 +353,8 @@ class PerformanceAnalyzer {
     }
 
     // 生成柱状图数据
-    List<double> barChartData = historicalScores.map((score) => score.value).toList();
+    List<double> barChartData =
+        historicalScores.map((score) => score.value).toList();
 
     // 生成雷达图数据（假设按考试类型分组）
     Map<String, List<double>> scoresByType = {};
@@ -351,7 +378,10 @@ class PerformanceAnalyzer {
     // 如果没有分组数据，使用总平均分
     if (radarData.isEmpty) {
       labels = ['平均分'];
-      radarData = [historicalScores.map((score) => score.value).reduce((a, b) => a + b) / historicalScores.length];
+      radarData = [
+        historicalScores.map((score) => score.value).reduce((a, b) => a + b) /
+            historicalScores.length,
+      ];
     }
 
     return {

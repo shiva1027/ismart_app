@@ -60,7 +60,6 @@ class ThemeHelper {
       primary: primaryColor,
       secondary: primaryColor.withOpacity(0.8),
       surface: Colors.white,
-      background: Color(0xFFF5F5F5),
       error: Colors.red.shade700,
     );
 
@@ -68,7 +67,7 @@ class ThemeHelper {
       useMaterial3: true,
       colorScheme: colorScheme,
       primaryColor: primaryColor,
-      scaffoldBackgroundColor: colorScheme.background,
+      scaffoldBackgroundColor: colorScheme.surface,
       appBarTheme: AppBarTheme(
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
@@ -76,18 +75,14 @@ class ThemeHelper {
       ),
       cardTheme: CardTheme(
         elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: primaryColor,
           foregroundColor: Colors.white,
           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -95,18 +90,14 @@ class ThemeHelper {
           foregroundColor: primaryColor,
           side: BorderSide(color: primaryColor),
           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: primaryColor,
           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -156,18 +147,9 @@ class ThemeHelper {
           fontWeight: FontWeight.w600,
           color: Colors.black87,
         ),
-        bodyLarge: TextStyle(
-          fontSize: 16,
-          color: Colors.black87,
-        ),
-        bodyMedium: TextStyle(
-          fontSize: 14,
-          color: Colors.black87,
-        ),
-        bodySmall: TextStyle(
-          fontSize: 12,
-          color: Colors.black54,
-        ),
+        bodyLarge: TextStyle(fontSize: 16, color: Colors.black87),
+        bodyMedium: TextStyle(fontSize: 14, color: Colors.black87),
+        bodySmall: TextStyle(fontSize: 12, color: Colors.black54),
       ),
       tabBarTheme: TabBarTheme(
         labelColor: Colors.white,
@@ -181,10 +163,7 @@ class ThemeHelper {
           color: primaryColor.withOpacity(0.3),
         ),
       ),
-      dividerTheme: DividerThemeData(
-        color: Colors.grey.shade200,
-        thickness: 1,
-      ),
+      dividerTheme: DividerThemeData(color: Colors.grey.shade200, thickness: 1),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: Colors.white,
         selectedItemColor: primaryColor,
@@ -193,15 +172,15 @@ class ThemeHelper {
         type: BottomNavigationBarType.fixed,
       ),
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith<Color>((
+          Set<WidgetState> states,
+        ) {
+          if (states.contains(WidgetState.selected)) {
             return primaryColor;
           }
           return Colors.transparent;
         }),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
     );
   }
@@ -213,7 +192,6 @@ class ThemeHelper {
       primary: primaryColor,
       secondary: primaryColor.withOpacity(0.8),
       surface: Color(0xFF222222),
-      background: Color(0xFF121212),
       error: Colors.red.shade300,
     );
 
@@ -221,7 +199,7 @@ class ThemeHelper {
       useMaterial3: true,
       colorScheme: colorScheme,
       primaryColor: primaryColor,
-      scaffoldBackgroundColor: colorScheme.background,
+      scaffoldBackgroundColor: colorScheme.surface,
       appBarTheme: AppBarTheme(
         backgroundColor: Color(0xFF222222),
         foregroundColor: Colors.white,
@@ -230,18 +208,14 @@ class ThemeHelper {
       cardTheme: CardTheme(
         color: Color(0xFF222222),
         elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: primaryColor,
           foregroundColor: Colors.white,
           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -249,18 +223,14 @@ class ThemeHelper {
           foregroundColor: primaryColor,
           side: BorderSide(color: primaryColor),
           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: primaryColor,
           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -310,18 +280,9 @@ class ThemeHelper {
           fontWeight: FontWeight.w600,
           color: Colors.white,
         ),
-        bodyLarge: TextStyle(
-          fontSize: 16,
-          color: Colors.white,
-        ),
-        bodyMedium: TextStyle(
-          fontSize: 14,
-          color: Colors.white70,
-        ),
-        bodySmall: TextStyle(
-          fontSize: 12,
-          color: Colors.white54,
-        ),
+        bodyLarge: TextStyle(fontSize: 16, color: Colors.white),
+        bodyMedium: TextStyle(fontSize: 14, color: Colors.white70),
+        bodySmall: TextStyle(fontSize: 12, color: Colors.white54),
       ),
       tabBarTheme: TabBarTheme(
         labelColor: Colors.white,
@@ -335,10 +296,7 @@ class ThemeHelper {
           color: primaryColor.withOpacity(0.3),
         ),
       ),
-      dividerTheme: DividerThemeData(
-        color: Colors.grey.shade800,
-        thickness: 1,
-      ),
+      dividerTheme: DividerThemeData(color: Colors.grey.shade800, thickness: 1),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: Color(0xFF222222),
         selectedItemColor: primaryColor,
@@ -347,15 +305,15 @@ class ThemeHelper {
         type: BottomNavigationBarType.fixed,
       ),
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith<Color>((
+          Set<WidgetState> states,
+        ) {
+          if (states.contains(WidgetState.selected)) {
             return primaryColor;
           }
           return Colors.transparent;
         }),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
     );
   }
@@ -370,7 +328,9 @@ class ThemeHelper {
   // 使用HSL颜色空间从主色生成不同深浅的颜色
   static Color generateShade(Color baseColor, double lightnessFactor) {
     final HSLColor hsl = HSLColor.fromColor(baseColor);
-    return hsl.withLightness((hsl.lightness * lightnessFactor).clamp(0.0, 1.0)).toColor();
+    return hsl
+        .withLightness((hsl.lightness * lightnessFactor).clamp(0.0, 1.0))
+        .toColor();
   }
 
   // 从主色生成颜色组
@@ -390,10 +350,7 @@ class ThemeColorOption {
   final String name;
   final Color color;
 
-  ThemeColorOption({
-    required this.name,
-    required this.color,
-  });
+  ThemeColorOption({required this.name, required this.color});
 }
 
 // 主题颜色组类
